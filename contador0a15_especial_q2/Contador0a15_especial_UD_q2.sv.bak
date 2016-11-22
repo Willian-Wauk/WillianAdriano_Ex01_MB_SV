@@ -1,0 +1,33 @@
+module Contador_0a15(input logic reset, clock,
+							output logic [3:0]saida_contador);
+							logic ciclo;
+							
+always_ff @(posedge clock or posedge reset)
+
+	begin
+	
+	if (reset)
+		begin
+		saida_contador <= 4'd0;
+		ciclo <= 0;
+		end
+		
+	else		
+		if(ciclo == 0)
+			if(saida_contador == 4'd14)
+				begin
+				saida_contador <= saida_contador + 4'd1;
+				ciclo <= 1;
+				end
+			else
+				saida_contador <= saida_contador + 4'd1;
+		else
+			if(saida_contador == 4'd1)
+				begin
+				saida_contador <= saida_contador - 4'd1;
+				ciclo <= 0;
+				end
+			else
+				saida_contador <= saida_contador - 4'd1;	
+	end
+endmodule
